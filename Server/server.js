@@ -39,13 +39,13 @@ app.post('/', async (req, res) => {
         presence_penalty: 0,
       });
       
-      console.log('\n\n**//**  This is the req\n',req);
+      // console.log('\n\n**//**  This is the req\n',req);
       res.status(200).send({
         bot: response.data.choices[0].text,
       });
       
       console.log('\n\n**//**  This is the response.data.choices[0].text\n',response.data.choices[0].text);
-      console.log('\n\nRES======\n',res);
+      // console.log('\n\nRES======\n',res);
       console.log('\n\nPROMPT======\n',prompt);
       
     } catch (error) {
