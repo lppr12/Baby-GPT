@@ -160,13 +160,13 @@ function generateUniqueId() {
         clearInterval(loaderInterval);
   
         const data = await response.json();
-        console.log('bsdiwala gpt',data.message);
+        console.log('bsdiwala gpt',data.bot);
 
   
         const botMessage = `
           <div class="message received">
             <div class="message-content">
-              <p class="received_t">${data.message}</p>
+              <p class="received_t">${data.bot}</p>
               <p class="text-end time text-muted">${getCurrentTime()}</p>
             </div>
           </div>
