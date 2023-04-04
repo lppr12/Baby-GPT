@@ -22,8 +22,8 @@
 
 
 
-      <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <div class="row r1">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
           <div class="container-fluid">
             <a class="navbar-brand" href="Index.html">Baby GPT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
+                    Themes
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#">Action</a></li>
@@ -47,9 +47,6 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                   </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
               </ul>
              
@@ -59,7 +56,7 @@
         </nav>
       </div>
   
-   
+   <br><br>
   
             <!-- <div class="container-fluid d-flex align-items-center  mainbox" >
               <div class="box ">
@@ -103,46 +100,44 @@
             </div>-->
             
           
-            <div>
+            
               <div class="card-body texts">
-                    
+
+                <!-- <div class="message sent">
+                  <div class="message-content">
+                    <div class=" sent_t">Hi there!
+                      <p class="time"></p>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="message received">
                   <div class="message-content">
-                    <p>Hello!</p>
+                    <div class="received_t">Hello
+                      <p class="time "></p>
+                    </div>
                   </div>
-                </div>
-  
-                <div class="message sent">
-                  <div class="message-content">
-                    <p class=" sent_t">Hi there!</p>
-                    <p class="time"></p>
-                  </div>
-                </div>
+                </div> -->
   
               </div>
-            </div>
+            
 
 
-            <br><br><br>
-            <div class="row">
+            
+            <div class="row r2">
               <footer class="fixed-bottom">
                
                 <div class="textbar">
-                  <textarea class="align1" placeholder="Ask anything..."></textarea>
-                  <button type="submit" onclick="sendMessage()"><i class="bi bi-send"></i></button>
+                  <textarea class="align1" id="textarea1" placeholder="Ask anything..." onkeydown="handleKeyDown(event)"></textarea>
+                  <button type="submit" id="subbut" onclick="sendMessage()"><i class="bi bi-send"></i></button>
                 </div>
                 
                 
               </footer>
             </div>
 
-
-
-
-
-
-
-    </div>
+    
+          
 
 
 
