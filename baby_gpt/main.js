@@ -42,20 +42,44 @@ function generateUniqueId() {
   const textarea = document.querySelector('textarea');
   const chatBox = document.querySelector('.texts');
   
+  // function loader(element) {
+  //   element.innerHTML = `
+  //     <div class="loader">
+  //       <div class="loader-box"></div>
+  //       <div class="loader-box"></div>
+  //       <div class="loader-box"></div>
+  //       <div class="loader-box"></div>
+  //     </div>
+  //   `;
+  
+  //   const boxes = element.querySelectorAll('.loader-box');
+  //   let delay = 0;
+  
+  //   boxes.forEach((box) => {
+  //     box.style.animationDelay = `${delay}s`;
+  //     delay += 0.1;
+  //   });
+  
+  //   return true;
+  // }
+
   function loader(element) {
-    element.textContent = '';
+    element.innerHTML = `
+      <div class="loader">
+        <div class="loader-dots">
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+        </div>
+        <div class="loader-text">
+          <div class="loader-text-1"></div>
+          <div class="loader-text-2"></div>
+          <div class="loader-text-3"></div>
+        </div>
+      </div>
+    `;
   
-    const loadInterval = setInterval(() => {
-      // Update the text content of the loading indicator
-      element.textContent += '.';
-  
-      // If the loading indicator has reached three dots, reset it
-      if (element.textContent === '....') {
-        element.textContent = '';
-      }
-    }, 300);
-  
-    return loadInterval;
+    return true;
   }
   
 
