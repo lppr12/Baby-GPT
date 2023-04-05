@@ -150,7 +150,7 @@ if (conversation.length > 1) {
     chatBox.appendChild(loaderText);
 
     try {
-      const response = await fetch('https://babygpt.onrender.com', {
+      const response = await fetch('https://babygptone.onrender.com', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
