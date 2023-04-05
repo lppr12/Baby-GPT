@@ -28,14 +28,46 @@ app.get('/',async (req,res)=>{
 
 app.post('/', async (req, res) => {
     try {
-      const prompt = req.body.prompt;
       
+
+      //convo history
+      //convo history
+      const conversation = req.body.conversation || [];
+
+      // Only keep the last 5 conversations
+      const contextConversation = conversation.slice(-5);
+      
+      const prompts = contextConversation.filter(item => item.sender === 'user').map(item => item.prompt);
+      const botResponses = contextConversation.filter(item => item.sender === 'bot').map(item => item.bot || '');
+      if (prompts.length > botResponses.length) {
+        botResponses.push('');
+      }
+      const context = prompts.map((prompt, i) => {
+        if (botResponses[i]) {
+          return `{Q: ${prompt} \n ${botResponses[i]}}`;
+        } else {
+          return `{Q: ${prompt}}`;
+        }
+      }).join('\n');
+      
+      
+      
+      console.log('\n\n**//**  This is the Context\n',context);
+      
+
+
+      
+      const prompt = req.body.prompt;
+
+      const promptful = `${context}\n{Q: ${prompt}}`;
+
+
       console.log('\n\n**//**  This is the prompt\n',req.body.prompt);
       const response = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `${prompt}`,
-        temperature: 1,
-        max_tokens: 4000,
+        prompt: `${promptful}`,
+        temperature: 0,
+        max_tokens: 3999,
         top_p: 1,
         frequency_penalty: 0.5,
         presence_penalty: 0,
@@ -52,6 +84,7 @@ app.post('/', async (req, res) => {
       console.log('\n\n**//**  This is the response.data\n',response.data);
       
     } catch (error) {
+      
       console.error(error);
       res.status(500).send({ error });
     }
