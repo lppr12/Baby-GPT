@@ -1,5 +1,120 @@
 
+async function sendMessage() {
+  const prompt = textarea.value.trim();
+  const time = getCurrentTime(); 
+  if (prompt !== '') {
+    const newMessage = `
+      <div class="message sent ">
+        <div class="message-content">
+          <div class="sent_t">${prompt}
+            <p class="text-end time text-muted">${time}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    chatBox.insertAdjacentHTML('beforeend', newMessage);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    textarea.value = '';
+    
+    // // Store the user message in local storage
+     const conversation = JSON.parse(localStorage.getItem('conversation') || '[]');
+     conversation.push({ prompt, time ,sender: 'user' });
+     localStorage.setItem('conversation', JSON.stringify(conversation));
+    // // 
 
+
+
+    const loaderText = document.createElement('p');
+    loaderText.textContent = 'Loading';
+    const loaderInterval = loader(loaderText);
+    chatBox.appendChild(loaderText);
+
+    try {
+      const response = await fetch('https://babygptone.onrender.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt, conversation })
+      });
+      clearInterval(loaderInterval);
+
+      const data = await response.json();
+
+      // Store the bot response in local storage
+      conversation.push({ bot: data.bot, time , sender: 'bot' });
+      localStorage.setItem('conversation', JSON.stringify(conversation));
+
+      const botMessage = `
+        <div class="message received">
+          <div class="message-content">
+            <div class="received_t" >
+           
+            ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+              if (index === 0) {
+                // Remove leading whitespace and "A:" prefix from first line
+                return `<p>${line.trim().replace(/^A:\s*/, '')}</p>`;
+              } else {
+                return `<p>${line.trim()}</p>`;
+              }
+            }).join('<br>')}
+            <p class="text-end time text-muted">${getCurrentTime()}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      chatBox.insertAdjacentHTML('beforeend', botMessage);
+      loaderText.remove();
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+      alert(error);
+      console.log(error);
+      clearInterval(loaderInterval);
+      loaderText.remove();
+    }
+  }
+  
+}
+
+
+
+
+
+  function handleKeyDown(event) {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 function generateUniqueId() {
@@ -119,94 +234,35 @@ if (conversation.length > 1) {
 
 
 
- async function sendMessage() {
-  const prompt = textarea.value.trim();
-  const time = getCurrentTime(); 
-  if (prompt !== '') {
-    const newMessage = `
-      <div class="message sent ">
-        <div class="message-content">
-          <div class="sent_t">${prompt}
-            <p class="text-end time text-muted">${time}</p>
-          </div>
-        </div>
-      </div>
-    `;
-    chatBox.insertAdjacentHTML('beforeend', newMessage);
-    chatBox.scrollTop = chatBox.scrollHeight;
-    textarea.value = '';
-    
-    // // Store the user message in local storage
-     const conversation = JSON.parse(localStorage.getItem('conversation') || '[]');
-     conversation.push({ prompt, time ,sender: 'user' });
-     localStorage.setItem('conversation', JSON.stringify(conversation));
-    // // 
-
-
-
-    const loaderText = document.createElement('p');
-    loaderText.textContent = 'Loading';
-    const loaderInterval = loader(loaderText);
-    chatBox.appendChild(loaderText);
-
-    try {
-      const response = await fetch('https://babygptone.onrender.com', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ prompt, conversation })
-      });
-      clearInterval(loaderInterval);
-
-      const data = await response.json();
-
-      // Store the bot response in local storage
-      conversation.push({ bot: data.bot, time , sender: 'bot' });
-      localStorage.setItem('conversation', JSON.stringify(conversation));
-
-      const botMessage = `
-        <div class="message received">
-          <div class="message-content">
-            <div class="received_t" >
-           
-            ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
-              if (index === 0) {
-                // Remove leading whitespace and "A:" prefix from first line
-                return `<p>${line.trim().replace(/^A:\s*/, '')}</p>`;
-              } else {
-                return `<p>${line.trim()}</p>`;
-              }
-            }).join('<br>')}
-            <p class="text-end time text-muted">${getCurrentTime()}</p>
-            </div>
-          </div>
-        </div>
-      `;
-
-      chatBox.insertAdjacentHTML('beforeend', botMessage);
-      loaderText.remove();
-      chatBox.scrollTop = chatBox.scrollHeight;
-    } catch (error) {
-      alert(error);
-      console.log(error);
-      clearInterval(loaderInterval);
-      loaderText.remove();
-    }
-  }
-  
-}
+                        
 
 
 
 
 
-  function handleKeyDown(event) {
-    if (event.keyCode === 13 && !event.shiftKey) {
-      event.preventDefault();
-      sendMessage();
-    }
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
