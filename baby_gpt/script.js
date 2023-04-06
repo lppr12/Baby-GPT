@@ -406,3 +406,62 @@ anime.timeline({loop: true})
     clrButton.addEventListener('click', clearLocalStorage);
   });
   
+
+
+
+
+
+
+
+
+  // Theme
+  // Get the buttons and elements
+const theme1Btn = document.querySelector('#theme1');
+const theme2Btn = document.querySelector('#theme2');
+const theme3Btn = document.querySelector('#theme3');
+const textarea1 = document.querySelector('.d0textarea');
+const sent = document.querySelector('.d0sent');
+const received = document.querySelector('.d0received');
+
+// Check local storage for the saved theme
+const savedTheme = localStorage.getItem('selectedTheme');
+if (savedTheme === 'theme1') {
+  textarea1.classList.add('d1textarea');
+  sent.classList.add('d1sent');
+  received.classList.add('d1received');
+} else if (savedTheme === 'theme2') {
+  textarea1.classList.add('d2textarea');
+  sent.classList.add('d2sent');
+  received.classList.add('d2received');
+}
+
+// Add event listeners to the buttons
+theme1Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d1textarea', 'd2textarea');
+  sent.classList.remove('d1sent', 'd2sent');
+  received.classList.remove('d1received', 'd2received');
+  textarea1.classList.add('d0textarea');
+  sent.classList.add('d0sent');
+  received.classList.add('d0received');
+  localStorage.setItem('selectedTheme', 'theme1');
+});
+
+theme2Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d0textarea', 'd2textarea');
+  sent.classList.remove('d0sent', 'd2sent');
+  received.classList.remove('d0received', 'd2received');
+  textarea1.classList.add('d1textarea');
+  sent.classList.add('d1sent');
+  received.classList.add('d1received');
+  localStorage.setItem('selectedTheme', 'theme2');
+});
+
+theme3Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d0textarea', 'd1textarea');
+  sent.classList.remove('d0sent', 'd1sent');
+  received.classList.remove('d0received', 'd1received');
+  textarea1.classList.add('d2textarea');
+  sent.classList.add('d2sent');
+  received.classList.add('d2received');
+  localStorage.setItem('selectedTheme', 'theme3');
+});

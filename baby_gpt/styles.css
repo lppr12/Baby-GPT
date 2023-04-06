@@ -4,9 +4,6 @@
 
 
 
-  :root {
-    --search-bg-color:linear-gradient(135deg, rgb(207, 192, 192) 20%, #b212e2 80%);
-  }
   
   .textbar {
     display: flex;
@@ -14,9 +11,9 @@
     padding: 3px;
     border-radius: 20px;
 
-    background-image: var(--search-bg-color);
+
   }
-  
+ 
   .textbar textarea {
     flex: 1;
     border: none;
@@ -25,10 +22,7 @@
     font-size: 12px;
     padding: 5px;
     margin-right: 10px;
-    
-  
     border-radius: 15px;
-    background-image: var(--search-bg-color);
     color: black;
     padding-top: 12.5px;
     padding-bottom: 0px;
@@ -93,8 +87,6 @@
   
   .received {
     /* background-color:rgba(120, 17, 141, 0.3); */
-    background: rgb(12,193,194);
-    background: linear-gradient(101deg, rgba(12,193,194,1) 15%, rgba(46,156,181,1) 26%, rgba(84,113,166,1) 37%, rgba(180,6,129,1) 53%, rgba(154,18,125,1) 73%, rgba(171,0,238,1) 92%);
     border-radius: 15px;
     font-family: 'PT Serif', serif;
     color: azure;
@@ -113,8 +105,6 @@
     border-radius: 15px;
     width: 65%;
     align-self: flex-end;
-    background: rgb(171,0,238);
-    background: linear-gradient(101deg, rgba(171,0,238,1) 13%, rgba(154,18,125,1) 26%, rgba(180,6,129,1) 45%, rgba(84,113,166,1) 63%, rgba(46,156,181,1) 78%, rgba(12,193,194,1) 94%);
     
     font-family: 'Source Serif Pro', serif;
     font-weight: 450;
@@ -135,38 +125,50 @@
 
 
 
+  /* Theme-01:Dark */
+  .d0textarea ,.d0textarea textarea{
+    background-image:linear-gradient(135deg, rgb(207, 192, 192) 20%, #b212e2 80%) ;
+  }
+  .d0sent{
+    background: rgb(171,0,238);
+    background: linear-gradient(101deg, rgba(171,0,238,1) 13%, rgba(154,18,125,1) 26%, rgba(180,6,129,1) 45%, rgba(84,113,166,1) 63%, rgba(46,156,181,1) 78%, rgba(12,193,194,1) 94%);
+    
+  }
+  .d0recieved{
+    background: rgb(12,193,194);
+    background: linear-gradient(101deg, rgba(12,193,194,1) 15%, rgba(46,156,181,1) 26%, rgba(84,113,166,1) 37%, rgba(180,6,129,1) 53%, rgba(154,18,125,1) 73%, rgba(171,0,238,1) 92%);
+    
+  }
+ 
+
+
 
   /* Theme-1:Dark */
   .d1textarea{
-    
+    background-color: #ff0404;
   }
   .d1sent{
-    
+    background-color: #ff0404;
   }
   .d1recieved{
-    
+    background-color: #ff0404;
   }
-  .d1nav{
-    
-  }
+  
 
 
 
   /* Theme-2:Dark */
   .d2textarea{
-
+    background-color: #2ecc40;
   }
 
   .d2sent{
-
+    background-color: #2ecc40;
   }
   .d2recieved{
-
+    background-color: #2ecc40;
   }
-  .d2nav{
-    
-  }
-
+ 
 
 
 
