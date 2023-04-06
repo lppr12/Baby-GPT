@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
       const conversation = req.body.conversation || [];
 
       // Only keep the last 5 conversations
-      const contextConversation = conversation.slice(-5);
+      const contextConversation = conversation.slice(-10);
       
       const prompts = contextConversation.filter(item => item.sender === 'user').map(item => item.prompt);
       const botResponses = contextConversation.filter(item => item.sender === 'bot').map(item => item.bot || '');
