@@ -1,11 +1,38 @@
 
 
 async function sendMessage() {
+
+
+
+// Theme decider //
+
+const savedTheme = localStorage.getItem('selectedTheme');
+let botMessageClass = '';
+let botMessageClass2 = '';
+if (savedTheme === 'theme1') {
+  botMessageClass = 'd0recieved';
+  botMessageClass2 = 'd0sent';
+} else if (savedTheme === 'theme2') {
+  botMessageClass = 'd1recieved';
+  botMessageClass2 = 'd1sent';
+} else {
+  botMessageClass = 'd2recieved';
+  botMessageClass2 = 'd2sent';
+}
+
+//////////////////
+
+
+
+
+
+
+
   const prompt = textarea.value.trim();
   const time = getCurrentTime(); 
   if (prompt !== '') {
     const newMessage = `
-      <div class="message sent ">
+      <div class="message sent ${botMessageClass2}">
         <div class="message-content">
           <div class="sent_t">${prompt}
             <p class="text-end time text-muted">${time}</p>
@@ -74,9 +101,9 @@ async function sendMessage() {
       if(data===undefined)
       {
         const botMessage = `
-          <div class="message received">
+          <div class="message recieved ${botMessageClass}">
             <div class="message-content">
-              <div class="received_t">
+              <div class="recieved_t">
                 ERROR! Plz retry :/
                 <p class="text-end time text-muted">${getCurrentTime()}</p>
               </div>
@@ -92,9 +119,9 @@ async function sendMessage() {
       if(data.bot ===undefined)
       {
         const botMessage = `
-          <div class="message received">
+          <div class="message recieved ${botMessageClass}">
             <div class="message-content">
-              <div class="received_t">
+              <div class="recieved_t">
                 ERROR! Plz retry :/
                 <p class="text-end time text-muted">${getCurrentTime()}</p>
               </div>
@@ -117,9 +144,9 @@ async function sendMessage() {
 
 
         const botMessage = `
-          <div class="message received">
+          <div class="message recieved ${botMessageClass}">
             <div class="message-content">
-              <div class="received_t">
+              <div class="recieved_t">
                 ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
                   if (index === 0) {
                     // Remove leading whitespace and "A:" prefix from first line
@@ -142,9 +169,9 @@ async function sendMessage() {
       
       console.log(error);
       const botMessage = `
-          <div class="message received">
+          <div class="message recieved ${botMessageClass}">
             <div class="message-content">
-              <div class="received_t">
+              <div class="recieved_t">
                 ERROR! Plz retry :/
                 <p class="text-end time text-muted">${getCurrentTime()}</p>
               </div>
@@ -284,12 +311,30 @@ const botResponses = conversation.filter(item => item.sender === 'bot').map(item
 const context = prompts.map((prompt, i) => prompt + '\n' + botResponses[i]).join('\n');
 
 
+// Theme decider //
+
+const savedTheme1 = localStorage.getItem('selectedTheme');
+let botMessageClass = '';
+let botMessageClass2 = '';
+if (savedTheme1 === 'theme1') {
+  botMessageClass = 'd0recieved';
+  botMessageClass2 = 'd0sent';
+} else if (savedTheme1 === 'theme2') {
+  botMessageClass = 'd1recieved';
+  botMessageClass2 = 'd2sent';
+} else {
+  botMessageClass = 'd2recieved';
+  botMessageClass2 = 'd2sent';
+}
+
+//////////////////
+
 // Display the conversation data in the chat box
 if (conversation.length > 1) {
   const messages = conversation.map(message => {
     if (message.sender === 'user') {
       return `
-        <div class="message sent">
+        <div class="message sent ${botMessageClass2}">
           <div class="message-content">
             <div class="sent_t">${message.prompt}
               <p class="text-end time text-muted">${message.time}</p>
@@ -299,9 +344,9 @@ if (conversation.length > 1) {
       `;
     } else {
       return `
-        <div class="message received">
+        <div class="message recieved ${botMessageClass}">
           <div class="message-content">
-            <div class="received_t">
+            <div class="recieved_t">
               
             ${message.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
               if (index === 0) {
@@ -414,4 +459,73 @@ anime.timeline({loop: true})
 
 
 
-  // Theme
+  // Theme //
+  // Get the buttons and elements
+const theme1Btn = document.querySelector('#theme1');
+const theme2Btn = document.querySelector('#theme2');
+const theme3Btn = document.querySelector('#theme3');
+const textarea1 = document.querySelector('.textbar');
+const sent = document.querySelector('.sent');
+const recieved = document.querySelector('.recieved');
+
+// Check local storage for the saved theme
+const savedTheme = localStorage.getItem('selectedTheme');
+console.log("SavedTheme:",savedTheme);
+if (savedTheme === 'theme1') {
+  textarea1.classList.add('d0textarea');
+  sent.classList.add('d0sent');
+  recieved.classList.add('d0recieved');
+
+  textarea1.classList.remove('d1textarea', 'd2textarea');
+  sent.classList.remove('d1sent', 'd2sent');
+  recieved.classList.remove('d1recieved', 'd2recieved');
+  
+} else if (savedTheme === 'theme2') {
+  textarea1.classList.add('d1textarea');
+  sent.classList.add('d1sent');
+  recieved.classList.add('d1recieved');
+
+  textarea1.classList.remove('d0textarea', 'd2textarea');
+  sent.classList.remove('d0sent', 'd2sent');
+  recieved.classList.remove('d0recieved', 'd2recieved');
+
+}else if (savedTheme === 'theme3') {
+  textarea1.classList.add('d2textarea');
+  sent.classList.add('d2sent');
+  recieved.classList.add('d2recieved');
+  textarea1.classList.remove('d0textarea', 'd1textarea');
+  sent.classList.remove('d0sent', 'd1sent');
+  recieved.classList.remove('d0recieved', 'd1recieved');
+
+}
+
+// Add event listeners to the buttons
+theme1Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d1textarea', 'd2textarea');
+  sent.classList.remove('d1sent', 'd2sent');
+  recieved.classList.remove('d1recieved', 'd2recieved');
+  textarea1.classList.add('d0textarea');
+  sent.classList.add('d0sent');
+  recieved.classList.add('d0recieved');
+  localStorage.setItem('selectedTheme', 'theme1');
+});
+
+theme2Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d0textarea', 'd2textarea');
+  sent.classList.remove('d0sent', 'd2sent');
+  recieved.classList.remove('d0recieved', 'd2recieved');
+  textarea1.classList.add('d1textarea');
+  sent.classList.add('d1sent');
+  recieved.classList.add('d1recieved');
+  localStorage.setItem('selectedTheme', 'theme2');
+});
+
+theme3Btn.addEventListener('click', () => {
+  textarea1.classList.remove('d0textarea', 'd1textarea');
+  sent.classList.remove('d0sent', 'd1sent');
+  recieved.classList.remove('d0recieved', 'd1recieved');
+  textarea1.classList.add('d2textarea');
+  sent.classList.add('d2sent');
+  recieved.classList.add('d2recieved');
+  localStorage.setItem('selectedTheme', 'theme3');
+});

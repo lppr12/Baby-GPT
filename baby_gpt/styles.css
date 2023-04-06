@@ -85,7 +85,7 @@
     padding: 2px;
   }
   
-  .received {
+  .recieved {
     /* background-color:rgba(120, 17, 141, 0.3); */
     border-radius: 15px;
     font-family: 'PT Serif', serif;
@@ -144,7 +144,7 @@
 
 
   /* Theme-1:Dark */
-  .d1textarea{
+  .d1textarea,.d1textarea textarea{
     background-color: #ff0404;
   }
   .d1sent{
@@ -158,7 +158,7 @@
 
 
   /* Theme-2:Dark */
-  .d2textarea{
+  .d2textarea,.d2textarea textarea{
     background-color: #2ecc40;
   }
 
