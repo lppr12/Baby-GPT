@@ -515,7 +515,7 @@ theme1Btn.addEventListener('click', () => {
   sent.classList.add('d0sent');
   recieved.classList.add('d0recieved');
   localStorage.setItem('selectedTheme', 'theme1');
-  location.reload();
+  location.reload(true);
 });
 
 theme2Btn.addEventListener('click', () => {
@@ -526,7 +526,7 @@ theme2Btn.addEventListener('click', () => {
   sent.classList.add('d1sent');
   recieved.classList.add('d1recieved');
   localStorage.setItem('selectedTheme', 'theme2');
-  location.reload();
+  location.reload(true);
 });
 
 theme3Btn.addEventListener('click', () => {
@@ -537,5 +537,5 @@ theme3Btn.addEventListener('click', () => {
   sent.classList.add('d2sent');
   recieved.classList.add('d2recieved');
   localStorage.setItem('selectedTheme', 'theme3');
-  location.reload();
+  location.reload(true);
 });
