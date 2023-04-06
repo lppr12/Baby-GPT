@@ -44,7 +44,7 @@ async function sendMessage() {
 
       
 
-      while (data == undefined) {
+      while (data === undefined) {
         response = await fetch('https://babygptone.onrender.com', {
         method: 'POST',
         headers: { 
@@ -56,8 +56,60 @@ async function sendMessage() {
 
       const data = await response.json();
       }
+      while (data.bot === undefined) {
+        response = await fetch('https://babygptone.onrender.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt, conversation })
+      });
+
+      clearInterval(loaderInterval);
+
+      const data = await response.json();
+      }
+
+
+      if(data===undefined)
+      {
+        const botMessage = `
+          <div class="message received">
+            <div class="message-content">
+              <div class="received_t">
+                ERROR! Plz retry :/
+                <p class="text-end time text-muted">${getCurrentTime()}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        chatBox.insertAdjacentHTML('beforeend', botMessage);
+        loaderText.remove();
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return;
+      }
+
+      if(data.bot ===undefined)
+      {
+        const botMessage = `
+          <div class="message received">
+            <div class="message-content">
+              <div class="received_t">
+                ERROR! Plz retry :/
+                <p class="text-end time text-muted">${getCurrentTime()}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        chatBox.insertAdjacentHTML('beforeend', botMessage);
+        loaderText.remove();
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return;
+      }
+
       console.log(data);
 
+      console.log('\n\n\nType--------',typeof data);
 
       // Store the bot response in local storage
       conversation.push({ bot: data.bot, time , sender: 'bot' });
@@ -87,9 +139,21 @@ async function sendMessage() {
       loaderText.remove();
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
-      alert(error);
-      console.log(error);
       
+      console.log(error);
+      const botMessage = `
+          <div class="message received">
+            <div class="message-content">
+              <div class="received_t">
+                ERROR! Plz retry :/
+                <p class="text-end time text-muted">${getCurrentTime()}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        chatBox.insertAdjacentHTML('beforeend', botMessage);
+        loaderText.remove();
+        chatBox.scrollTop = chatBox.scrollHeight;
       clearInterval(loaderInterval);
       loaderText.remove();
       // location.reload();
