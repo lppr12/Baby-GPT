@@ -321,7 +321,7 @@ if (savedTheme1 === 'theme1') {
   botMessageClass2 = 'd0sent';
 } else if (savedTheme1 === 'theme2') {
   botMessageClass = 'd1recieved';
-  botMessageClass2 = 'd2sent';
+  botMessageClass2 = 'd1sent';
 } else {
   botMessageClass = 'd2recieved';
   botMessageClass2 = 'd2sent';
