@@ -496,7 +496,7 @@ if (savedTheme === 'theme1') {
   textarea1.classList.remove('d0textarea', 'd1textarea');
   sent.classList.remove('d0sent', 'd1sent');
   recieved.classList.remove('d0recieved', 'd1recieved');
-
+  
 }
 
 // Add event listeners to the buttons
@@ -508,6 +508,7 @@ theme1Btn.addEventListener('click', () => {
   sent.classList.add('d0sent');
   recieved.classList.add('d0recieved');
   localStorage.setItem('selectedTheme', 'theme1');
+  location.reload();
 });
 
 theme2Btn.addEventListener('click', () => {
@@ -518,6 +519,7 @@ theme2Btn.addEventListener('click', () => {
   sent.classList.add('d1sent');
   recieved.classList.add('d1recieved');
   localStorage.setItem('selectedTheme', 'theme2');
+  location.reload();
 });
 
 theme3Btn.addEventListener('click', () => {
@@ -528,4 +530,5 @@ theme3Btn.addEventListener('click', () => {
   sent.classList.add('d2sent');
   recieved.classList.add('d2recieved');
   localStorage.setItem('selectedTheme', 'theme3');
+  location.reload();
 });
