@@ -508,34 +508,37 @@ if (savedTheme === 'theme1') {
 
 // Add event listeners to the buttons
 theme1Btn.addEventListener('click', () => {
-  textarea1.classList.remove('d1textarea', 'd2textarea');
-  sent.classList.remove('d1sent', 'd2sent');
-  recieved.classList.remove('d1recieved', 'd2recieved');
   textarea1.classList.add('d0textarea');
   sent.classList.add('d0sent');
   recieved.classList.add('d0recieved');
+  textarea1.classList.remove('d1textarea', 'd2textarea');
+  sent.classList.remove('d1sent', 'd2sent');
+  recieved.classList.remove('d1recieved', 'd2recieved');
+  
   localStorage.setItem('selectedTheme', 'theme1');
   location.reload(true);
 });
 
 theme2Btn.addEventListener('click', () => {
-  textarea1.classList.remove('d0textarea', 'd2textarea');
-  sent.classList.remove('d0sent', 'd2sent');
-  recieved.classList.remove('d0recieved', 'd2recieved');
   textarea1.classList.add('d1textarea');
   sent.classList.add('d1sent');
   recieved.classList.add('d1recieved');
+  textarea1.classList.remove('d0textarea', 'd2textarea');
+  sent.classList.remove('d0sent', 'd2sent');
+  recieved.classList.remove('d0recieved', 'd2recieved');
+  
   localStorage.setItem('selectedTheme', 'theme2');
   location.reload(true);
 });
 
 theme3Btn.addEventListener('click', () => {
-  textarea1.classList.remove('d0textarea', 'd1textarea');
-  sent.classList.remove('d0sent', 'd1sent');
-  recieved.classList.remove('d0recieved', 'd1recieved');
   textarea1.classList.add('d2textarea');
   sent.classList.add('d2sent');
   recieved.classList.add('d2recieved');
+  textarea1.classList.remove('d0textarea', 'd1textarea');
+  sent.classList.remove('d0sent', 'd1sent');
+  recieved.classList.remove('d0recieved', 'd1recieved');
+  
   localStorage.setItem('selectedTheme', 'theme3');
   location.reload(true);
 });
