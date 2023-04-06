@@ -443,7 +443,7 @@ anime.timeline({loop: true})
   
   
   function clearLocalStorage() {
-    localStorage.clear();
+    localStorage.removeItem('conversation');
   }
 
   document.addEventListener("DOMContentLoaded", function() {
@@ -460,6 +460,13 @@ anime.timeline({loop: true})
 
 
   // Theme //
+
+
+  if (!localStorage.getItem('selectedTheme')) {
+    // Set selectedTheme item to theme1
+    localStorage.setItem('selectedTheme', 'theme1');
+  }
+
   // Get the buttons and elements
 const theme1Btn = document.querySelector('#theme1');
 const theme2Btn = document.querySelector('#theme2');
