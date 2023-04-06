@@ -38,8 +38,6 @@
 
    <body class="bgrclr">
 
-
-<script type="module" src="script.js" async></script>
    
     <div class="container-fluid">
       
@@ -83,7 +81,7 @@
                   </ul>
                 </li>
                 <li class="nav-item clearbut">
-                  <button class="btn btn-danger btn-sm" onclick=clearLocalStorage()><font id="clrbut">Clear History</font></button>
+                  <button class="btn btn-danger btn-sm" id="clrbut" ><font id="clrbut">Clear History</font></button>
                 </li>
               </ul>
              
@@ -126,8 +124,8 @@
               <footer class="fixed-bottom">
                
                 <div class="textbar">
-                  <textarea class="align1" id="textarea1" placeholder="Ask anything..." onkeydown="handleKeyDown(event)"></textarea>
-                  <button type="submit" id="subbut" onclick="sendMessage()"><i class="bi bi-send"></i></button>
+                  <textarea class="align1" id="textarea1" placeholder="Ask anything..." ></textarea>
+                  <button type="submit" class="subbut" ><i class="bi bi-send"></i></button>
                 </div>
                 
                 
@@ -138,7 +136,7 @@
       
 
       
-            
+            <script  src="script.js" ></script>
           
           </body>
 

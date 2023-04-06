@@ -1,4 +1,5 @@
 
+
 async function sendMessage() {
   const prompt = textarea.value.trim();
   const time = getCurrentTime(); 
@@ -41,28 +42,46 @@ async function sendMessage() {
 
       const data = await response.json();
 
+      
+
+      while (data == undefined) {
+        response = await fetch('https://babygptone.onrender.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt, conversation })
+      });
+      clearInterval(loaderInterval);
+
+      const data = await response.json();
+      }
+      console.log(data);
+
+
       // Store the bot response in local storage
       conversation.push({ bot: data.bot, time , sender: 'bot' });
       localStorage.setItem('conversation', JSON.stringify(conversation));
 
-      const botMessage = `
-        <div class="message received">
-          <div class="message-content">
-            <div class="received_t" >
-           
-            ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
-              if (index === 0) {
-                // Remove leading whitespace and "A:" prefix from first line
-                return `<p>${line.trim().replace(/^A:\s*/, '')}</p>`;
-              } else {
-                return `<p>${line.trim()}</p>`;
-              }
-            }).join('<br>')}
-            <p class="text-end time text-muted">${getCurrentTime()}</p>
+
+        const botMessage = `
+          <div class="message received">
+            <div class="message-content">
+              <div class="received_t">
+                ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+                  if (index === 0) {
+                    // Remove leading whitespace and "A:" prefix from first line
+                    return `<p>${line.trim().replace(/^A:\s*/, '')}</p>`;
+                  } else {
+                    return `<p>${line.trim()}</p>`;
+                  }
+                }).join('<br>')}
+                <p class="text-end time text-muted">${getCurrentTime()}</p>
+              </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
+      
 
       chatBox.insertAdjacentHTML('beforeend', botMessage);
       loaderText.remove();
@@ -70,12 +89,18 @@ async function sendMessage() {
     } catch (error) {
       alert(error);
       console.log(error);
+      
       clearInterval(loaderInterval);
       loaderText.remove();
+      // location.reload();
     }
   }
   
 }
+
+
+const submitButton = document.querySelector('.subbut');
+submitButton.addEventListener('click', sendMessage);
 
 
 
@@ -89,6 +114,8 @@ async function sendMessage() {
   }
 
 
+  const textArea = document.querySelector('#textarea1');
+textArea.addEventListener('keydown', handleKeyDown);
 
 
 
@@ -114,7 +141,9 @@ async function sendMessage() {
 
 
 
-  
+
+
+
 
 
 function generateUniqueId() {
@@ -179,6 +208,8 @@ function generateUniqueId() {
   
 
 
+// Restoring convo//
+
 // Retrieve the conversation data from local storage
 const conversation = JSON.parse(localStorage.getItem('conversation') || '[]');
 
@@ -208,7 +239,7 @@ if (conversation.length > 1) {
           <div class="message-content">
             <div class="received_t">
               
-            ${data.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
+            ${message.bot.split('\n').filter(line => line.trim() !== '').map((line, index) => {
               if (index === 0) {
                 // Remove leading whitespace and "A:" prefix from first line
                 return `<p>${line.trim().replace(/^A:\s*/, '')}</p>`;
@@ -301,7 +332,13 @@ anime.timeline({loop: true})
   });
 
   
-
+  
   function clearLocalStorage() {
     localStorage.clear();
   }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const clrButton = document.querySelector('#clrbut');
+    clrButton.addEventListener('click', clearLocalStorage);
+  });
+  
