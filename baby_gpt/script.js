@@ -442,8 +442,22 @@ anime.timeline({loop: true})
 
   
   
+
+
+
+
+
+
+
+
+
+
+
+
+  // clear history
   function clearLocalStorage() {
     localStorage.removeItem('conversation');
+    location.reload(true);
   }
 
   document.addEventListener("DOMContentLoaded", function() {
@@ -471,6 +485,7 @@ anime.timeline({loop: true})
 const theme1Btn = document.querySelector('#theme1');
 const theme2Btn = document.querySelector('#theme2');
 const theme3Btn = document.querySelector('#theme3');
+const bgclr= document.querySelector('.bg');
 const textarea1 = document.querySelector('.textbar');
 const sent = document.querySelector('.sent');
 const recieved = document.querySelector('.recieved');
@@ -479,30 +494,40 @@ const recieved = document.querySelector('.recieved');
 const savedTheme = localStorage.getItem('selectedTheme');
 console.log("SavedTheme:",savedTheme);
 if (savedTheme === 'theme1') {
+  bgclr.classList.add('bgrclr0');
   textarea1.classList.add('d0textarea');
   sent.classList.add('d0sent');
   recieved.classList.add('d0recieved');
+  
 
   textarea1.classList.remove('d1textarea', 'd2textarea');
   sent.classList.remove('d1sent', 'd2sent');
   recieved.classList.remove('d1recieved', 'd2recieved');
+  bgclr.classList.remove('bgrclr1', 'bgrclr2');
   
 } else if (savedTheme === 'theme2') {
+  bgclr.classList.add('bgrclr1');
   textarea1.classList.add('d1textarea');
   sent.classList.add('d1sent');
   recieved.classList.add('d1recieved');
+  
 
   textarea1.classList.remove('d0textarea', 'd2textarea');
   sent.classList.remove('d0sent', 'd2sent');
   recieved.classList.remove('d0recieved', 'd2recieved');
+  bgclr.classList.remove('bgrclr0', 'bgrclr2');
 
 }else if (savedTheme === 'theme3') {
+  bgclr.classList.add('bgrclr2');
   textarea1.classList.add('d2textarea');
   sent.classList.add('d2sent');
   recieved.classList.add('d2recieved');
+  
+
   textarea1.classList.remove('d0textarea', 'd1textarea');
   sent.classList.remove('d0sent', 'd1sent');
   recieved.classList.remove('d0recieved', 'd1recieved');
+  bgclr.classList.remove('bgrclr0', 'bgrclr1');
   
 }
 
@@ -511,10 +536,13 @@ theme1Btn.addEventListener('click', () => {
   textarea1.classList.add('d0textarea');
   sent.classList.add('d0sent');
   recieved.classList.add('d0recieved');
+  bgclr.classList.add('bgrclr0');
+
   textarea1.classList.remove('d1textarea', 'd2textarea');
   sent.classList.remove('d1sent', 'd2sent');
   recieved.classList.remove('d1recieved', 'd2recieved');
-  
+  bgclr.classList.remove('bgrclr1', 'bgrclr2');
+
   localStorage.setItem('selectedTheme', 'theme1');
   location.reload(true);
 });
@@ -523,10 +551,12 @@ theme2Btn.addEventListener('click', () => {
   textarea1.classList.add('d1textarea');
   sent.classList.add('d1sent');
   recieved.classList.add('d1recieved');
+  bgclr.classList.add('bgrclr1');
+
   textarea1.classList.remove('d0textarea', 'd2textarea');
   sent.classList.remove('d0sent', 'd2sent');
   recieved.classList.remove('d0recieved', 'd2recieved');
-  
+  bgclr.classList.remove('bgrclr0', 'bgrclr2');
   localStorage.setItem('selectedTheme', 'theme2');
   location.reload(true);
 });
@@ -535,9 +565,12 @@ theme3Btn.addEventListener('click', () => {
   textarea1.classList.add('d2textarea');
   sent.classList.add('d2sent');
   recieved.classList.add('d2recieved');
+  bgclr.classList.add('bgrclr2');
+
   textarea1.classList.remove('d0textarea', 'd1textarea');
   sent.classList.remove('d0sent', 'd1sent');
   recieved.classList.remove('d0recieved', 'd1recieved');
+  bgclr.classList.remove('bgrclr0', 'bgrclr1');
   
   localStorage.setItem('selectedTheme', 'theme3');
   location.reload(true);
