@@ -83,19 +83,7 @@ if (savedTheme === 'theme1') {
 
       const data = await response.json();
       }
-      while (data.bot === undefined) {
-        response = await fetch('https://babygptone.onrender.com', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ prompt, conversation })
-      });
-
-      clearInterval(loaderInterval);
-
-      const data = await response.json();
-      }
+      
 
 
       if(data===undefined)
