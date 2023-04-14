@@ -58,7 +58,7 @@ if (savedTheme === 'theme1') {
     chatBox.appendChild(loaderText);
 
     try {
-      const response = await fetch('https://babygptone.onrender.com', {
+      let response = await fetch('https://babygptone.onrender.com', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
@@ -134,9 +134,9 @@ if (savedTheme === 'theme1') {
         return;
       }
 
-      console.log(data);
+      console.log("Data:",data);
 
-      console.log('\n\n\nType--------',typeof data);
+     
 
       // Store the bot response in local storage
       conversation.push({ bot: data.bot, time , sender: 'bot' });
